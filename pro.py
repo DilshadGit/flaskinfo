@@ -2,9 +2,18 @@ from flask import (
 	Flask,
 	render_template,
 	url_for,
+	flash,
+	redirect,
 )
 
+from accounts.forms import (
+	LoginForm,
+	RegisterationForm,
+)
+
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'b83db2fa7f4b761557ce54d0c8c43ca9b784'
 
 posts = [
 	{
@@ -37,6 +46,36 @@ def home():
 @app.route('/about')
 def about():
 	return render_template('about.html', title='About', posts=posts)
+
+
+'''
+In the register form there is a request when you click on submit
+you have to add methods in the rout
+'''
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+	form = RegisterationForm()
+	if form.validate_on_submit():
+		flash(f'{ form.username.data.upper() } Your account successfully created', 'success')
+		return redirect(url_for('home'))
+
+	return render_template('account/register_form.html', title='Registeration', form=form)
+
+
+'''
+In the register form there is a request when you click on submit
+you have to add methods in the rout
+'''
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+	form = LoginForm()
+	if form.validate_on_submit():
+		if form.email.data == 'dilmac@gmail.com' and form.password.data == 'admin123':
+			flash(f'You have been successfully logged in!', 'success')
+			return redirect(url_for('home'))
+		else:
+			flash('Invalide details. Please check your username and password!', 'danger')
+	return render_template('account/login_form.html', title='Login', form=form)
 
 
 if __name__ == '__main__':

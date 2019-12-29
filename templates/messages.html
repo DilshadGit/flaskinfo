@@ -1,0 +1,18 @@
+ <div class="album py-5 bg-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<!-- This flash come up when the form submit -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+						{% for category, message in messages %}
+							<div class="alert alert-{{ category }}">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			</div>
+		</div>
+	</div>
+</div>

@@ -18,3 +18,4 @@
 ### Import flash to check if the form is validate when the user add data in the form.
 
 ### Creat database for the application need to install flask-sqlalchemy
+#### Saperate class models from main apps to make it more clear

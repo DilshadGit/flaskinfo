@@ -65,28 +65,30 @@ you have to add methods in the rout
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-	form = RegisterationForm()
-	if form.validate_on_submit():
-		flash(f'{ form.username.data.upper() } Your account successfully created', 'success')
-		return redirect(url_for('home'))
+    form = RegisterationForm()
+    if form.validate_on_submit():
+        flash(
+            f'{ form.username.data.upper() } your account successfully created', 'success')
+        return redirect(url_for('home'))
     return render_template('account/register_form.html', title='Registeration', form=form)
 
 
-'''
-In the register form there is a request when you click on submit
-you have to add methods in the rout
-'''
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	form = LoginForm()
-	if form.validate_on_submit():
-		if form.email.data == 'dilmac@gmail.com' and form.password.data == 'admin123':
-			flash(f'You have been successfully logged in!', 'success')
-			return redirect(url_for('home'))
-		else:
-			flash('Invalide details. Please check your username and password!', 'danger')
+    '''
+    In the register form there is a request when you click on submit
+    which is means get or post therefore you have to add methods as
+    an argument to the route.
+    '''
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'dilmac@gmail.com' and form.password.data == 'admin123':
+            flash(f'You have been successfully logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Invalide details. Please check your username and password!', 'danger')
     return render_template('account/login_form.html', title='Login', form=form)
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
+    app.run(debug=True)

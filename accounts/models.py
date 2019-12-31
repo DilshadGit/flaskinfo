@@ -1,5 +1,5 @@
 from datetime import datetime
-from ..pro import db
+from pro import db
 
 
 class User(db.Model):
@@ -25,7 +25,7 @@ class Post(db.Model):
     '''
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(90), nullable=False)
-    content = db.Column(db.Text, nullable=False, default='default.jpg')
+    content = db.Column(db.Text, nullable=False)
     photo = db.Column(db.String(42), nullable=False, default='default.jpg')
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.Foreignkey('user.id'), nullable=False)

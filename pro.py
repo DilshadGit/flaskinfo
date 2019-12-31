@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import (
     Flask,
     render_template,
@@ -13,7 +15,7 @@ from accounts.forms import (
     RegisterationForm,
 )
 
-from accounts.models import User, Post
+# from accounts.models import User, Post
 
 
 app = Flask(__name__)
@@ -24,26 +26,58 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_db.db'
 
 db = SQLAlchemy(app)
 
-posts = [
-    {
-        'title': 'Python3',
-        'author': 'Dilshad',
-        'date': '01 Dec 2019',
-        'content': ' Welcome to Python3'
-    },
-    {
-        'title': 'Django3',
-        'author': 'Azad',
-        'date': '01 Nov 2019',
-        'content': ' Welcome to Django3'
-    },
-    {
-        'title': 'Flask',
-        'author': 'Shvan',
-        'date': '01 Aug 2018',
-        'content': ' Welcome to Flask'
-    }
-]
+# posts = [
+#     {
+#         'title': 'Python3',
+#         'author': 'Dilshad',
+#         'date': '01 Dec 2019',
+#         'content': ' Welcome to Python3'
+#     },
+#     {
+#         'title': 'Django3',
+#         'author': 'Azad',
+#         'date': '01 Nov 2019',
+#         'content': ' Welcome to Django3'
+#     },
+#     {
+#         'title': 'Flask',
+#         'author': 'Shvan',
+#         'date': '01 Aug 2018',
+#         'content': ' Welcome to Flask'
+#     }
+# ]
+
+
+class User(db.Model):
+    '''
+    lazy argument used to load the data from sql alchemy database
+    argument use for another field in post model
+    '''
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(16), unique=True, nullable=False)
+    email = db.Column(db.String(80), unique=True, nullable=False)
+    image = db.Column(db.String(22), nullable=False, default='default.jpg')
+    password = db.Column(db.String(40), nullable=False)
+    posts = db.relationship('Post', backref='author', lazy=True)
+
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}', '{self.image}')"
+
+
+class Post(db.Model):
+    '''
+    we have to add user_if there is a relationships
+    user and post model.
+    '''
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(90), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    photo = db.Column(db.String(42), nullable=False, default='default.jpg')
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"User('{self.title}', '{self.date}', '{self.photo}')"
 
 
 @app.route('/')

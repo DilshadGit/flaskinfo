@@ -105,3 +105,6 @@ User('raffi', 'raffi@gmail.com', 'default.jpg')
 >>> Post.query.all()
 []
 >>> 
+
+
+serculare import

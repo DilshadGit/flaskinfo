@@ -26,26 +26,26 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_db.db'
 
 db = SQLAlchemy(app)
 
-# posts = [
-#     {
-#         'title': 'Python3',
-#         'author': 'Dilshad',
-#         'date': '01 Dec 2019',
-#         'content': ' Welcome to Python3'
-#     },
-#     {
-#         'title': 'Django3',
-#         'author': 'Azad',
-#         'date': '01 Nov 2019',
-#         'content': ' Welcome to Django3'
-#     },
-#     {
-#         'title': 'Flask',
-#         'author': 'Shvan',
-#         'date': '01 Aug 2018',
-#         'content': ' Welcome to Flask'
-#     }
-# ]
+posts = [
+    {
+        'title': 'Python3',
+        'author': 'Dilshad',
+        'date': '01 Dec 2019',
+        'content': ' Welcome to Python3'
+    },
+    {
+        'title': 'Django3',
+        'author': 'Azad',
+        'date': '01 Nov 2019',
+        'content': ' Welcome to Django3'
+    },
+    {
+        'title': 'Flask',
+        'author': 'Shvan',
+        'date': '01 Aug 2018',
+        'content': ' Welcome to Flask'
+    }
+]
 
 
 class User(db.Model):

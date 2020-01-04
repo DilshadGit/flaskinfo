@@ -4,3 +4,6 @@
 *.sqlite1
 *.sqlite2
 *.sqlite3
+
+*.pytest_cache/
+

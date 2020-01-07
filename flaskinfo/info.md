@@ -132,4 +132,66 @@ flaskinfo$ tree
 	deleted:    pro.py
 	new file:   run.py
 
-##
+## for scure password we need to install flask-bcrypt than go to python shell
+	flaskinfo$ python
+	Python 3.7.5 (default, Nov  7 2019, 10:50:52) 
+	[GCC 8.3.0] on linux
+	Type "help", "copyright", "credits" or "license" for more information.
+	>>> from flask_bcrypt import Bcrypt
+	>>> bcrypy = Bcrypt()
+	>>> bcrypt.generate_password_hash('admin123')
+	Traceback (most recent call last):
+	  File "<stdin>", line 1, in <module>
+	NameError: name 'bcrypt' is not defined
+	>>> bcrypt = Bcrypt()
+	>>> bcrypt.generate_password_hash('admin123')
+	b'$2b$12$618OQ/qKlgrMIK68sm4JU.Ce84WflOp37kBugsarbcMBlpZ4XPS8y'
+	>>> bcrypt.generate_password_hash('admin123')
+	b'$2b$12$y6GJ5xpeEYmYXr3PfNAnROhJYOUwPtfUQdIaZYpqUdxpC22Sn.rda'
+	>>> bcrypt.generate_password_hash('admin123').decode('utf-8')
+	'$2b$12$3ExfH2hKolzUXIgemX6v/uDLWzbQDS.gRWWWhYLt9Du8kI3AKn4sm'
+	>>> bcrypt.generate_password_hash('admin123').decode('utf-8')
+	'$2b$12$oZTPayXIoWqMtXxDOLYaz.urHGQVPh5GcLrges08PkyOFaOb8FJie'
+	>>> bcrypt.generate_password_hash('admin123').decode('utf-8')
+	'$2b$12$V/LBIxF6CVz0KxcgQgUOeeGiKztB5s7v0NEo51frRqGvEZfZhpm0m'
+	>>> hashed_password = bcrypt.generate_password_hash('admin123').decode('utf-8')
+	>>> hashed_password
+	'$2b$12$76jK62c5BJ/1Wrse94R7qOFHKj5gRMaLk8oqai9xanMIWnWE8lirW'
+	>>> 
+	>>> hashed_password
+	'$2b$12$76jK62c5BJ/1Wrse94R7qOFHKj5gRMaLk8oqai9xanMIWnWE8lirW'
+
+## We check the password hashed
+	>>> bcrypt.check_password_hash(hashed_password, 'password')
+	False
+	>>> bcrypt.check_password_hash(hashed_password, 'admin123')
+	True
+	>>> 
+
+## After new user registered check if is saved in db login to shell again:
+	/flaskinfo$ python
+	Python 3.7.5 (default, Nov  7 2019, 10:50:52) 
+	[GCC 8.3.0] on linux
+	Type "help", "copyright", "credits" or "license" for more information.
+	>>> from flaskinfo import db
+	/home/raffi/.virtualenvs/flaskinfoenv/lib/python3.7/site-packages/flask_sqlalchemy/__init__.py:835: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+	  'SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and '
+
+
+	>>> from flaskinfo.accounts.models import User
+	>>> user = User.query.first()
+	>>> user
+	User('dilshad', 'dilshad@gmail.com', 'default.jpg')
+	>>> users = User.query.all()
+	>>> users
+	[User('dilshad', 'dilshad@gmail.com', 'default.jpg'), User('hello', 'hello@gmail.com', 'default.jpg')]
+	>>> user.password
+	'$2b$12$8.MMceoyvP/A9YtYR0Ps..5eegyVKyrNuRPy4an6AZ8vwg2wBmWG.'
+	>>> user.password
+	'$2b$12$8.MMceoyvP/A9YtYR0Ps..5eegyVKyrNuRPy4an6AZ8vwg2wBmWG.'
+	>>> 
+
+## for check user login page or form need install flask_login
+	import from flask_login import LoginManager in the __init__
+
+

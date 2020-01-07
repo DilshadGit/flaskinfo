@@ -1,8 +1,17 @@
 from datetime import datetime
-from flaskinfo import db
+from flaskinfo import db, login_manager
+"""Import user mixin to help us we following:
+is_authenticate, is_active, is_annoumouse, get_id"""
+from flask_login import UserMixin
 
 
-class User(db.Model):
+## create decorator to hel on the login route
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
     '''
     lazy argument used to load the data from sql alchemy database
     argument use for another field in post model

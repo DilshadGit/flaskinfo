@@ -1,3 +1,4 @@
+import email_validator
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField,
@@ -14,7 +15,8 @@ from wtforms.validators import (
 	length,
 	Email,
 	EqualTo,
-	ValidationError)
+	ValidationError
+	)
 
 
 class RegisterationForm(FlaskForm):

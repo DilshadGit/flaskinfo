@@ -1,4 +1,4 @@
-from flaskinfo import app
+from flaskproject import app
 import unittest
 
 

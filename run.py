@@ -1,4 +1,4 @@
-from flaskinfo import app
+from tryflask import app
 
 
 if __name__ == '__main__':

@@ -195,3 +195,8 @@ flaskinfo$ tree
 	import from flask_login import LoginManager in the __init__
 
 
+## 	If you want to enable track modifications add:
+#	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+## 	Otherwise, if you are not using this feature, you may want to change the value to False:
+#	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

@@ -6,9 +6,11 @@ from flask import (
     redirect,
     request
 )
-from flaskinfo import app, db, bcrypt
-from flaskinfo.accounts.forms import LoginForm, RegisterationForm
-from flaskinfo.accounts.models import User, Post
+
+
+from tryflask import app, db, bcrypt
+from tryflask.accounts.forms import LoginForm, RegisterationForm
+from tryflask.accounts.models import User, Post
 # after check the user email and password we need to import 
 from flask_login import (
     login_user,
@@ -39,7 +41,7 @@ posts = [
 ]
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/home')
 def home():
     return render_template('index.html', title='Post', posts=posts)

@@ -1,5 +1,5 @@
 from datetime import datetime
-from flaskinfo import db, login_manager
+from tryflask import db, login_manager
 """Import user mixin to help us we following:
 is_authenticate, is_active, is_annoumouse, get_id"""
 from flask_login import UserMixin

@@ -11,7 +11,7 @@ from flask import (
 from tryflask import app, db, bcrypt
 from tryflask.accounts.forms import LoginForm, RegisterationForm
 from tryflask.accounts.models import User, Post
-# after check the user email and password we need to import 
+# after check the user email and password we need to import
 from flask_login import (
     login_user,
     current_user,
@@ -41,10 +41,16 @@ posts = [
 ]
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 @app.route('/home')
 def home():
     return render_template('index.html', title='Post', posts=posts)
+
+
+@app.route('/data', methods=['GET', 'POST'])
+@app.route('/product')
+def product():
+    return render_template('products.html', title='Post', posts=posts)
 
 
 @app.route('/about')
